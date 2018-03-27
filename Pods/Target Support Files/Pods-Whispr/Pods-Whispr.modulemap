@@ -1,0 +1,6 @@
+framework module Pods_Whispr {
+  umbrella header "Pods-Whispr-umbrella.h"
+
+  export *
+  module * { export * }
+}
