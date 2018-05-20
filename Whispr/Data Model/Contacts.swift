@@ -1,5 +1,5 @@
 //
-//  User.swift
+//  Contacts.swift
 //  Whispr
 //
 //  Created by Neema Badihian on 5/20/18.
@@ -9,6 +9,6 @@
 import Foundation
 import RealmSwift
 
-class User: Object {
+class Contacts: Object {
     @objc dynamic var phoneNumber : String = ""
 }
