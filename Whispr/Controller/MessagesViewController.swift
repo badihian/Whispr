@@ -21,8 +21,6 @@ class MessagesViewController: UIViewController, UITableViewDelegate, UITableView
     var cellContactNumber = String()
     var cellContactName = String()
     
-    
-    
     var composePressed = Bool()
     
     override func viewDidLoad() {

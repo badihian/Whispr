@@ -10,6 +10,7 @@ target 'Whispr' do
     pod 'Firebase/Database'
     pod 'SVProgressHUD'
     pod 'ChameleonFramework'
+    pod 'RealmSwift'
 
 end
 
