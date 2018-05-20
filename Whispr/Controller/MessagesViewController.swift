@@ -9,6 +9,7 @@
 import UIKit
 import Contacts
 import Firebase
+import RealmSwift
 
 class MessagesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var messageSearchBar: UISearchBar!
@@ -20,6 +21,8 @@ class MessagesViewController: UIViewController, UITableViewDelegate, UITableView
     var conversationArray = [ChatMessages]()
     var cellContactNumber = String()
     var cellContactName = String()
+    
+    let realm = try! Realm()
     
     var composePressed = Bool()
     

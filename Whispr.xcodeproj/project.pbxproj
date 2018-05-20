@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A13F29620B22D0900DFEFAA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A13F29520B22D0900DFEFAA /* User.swift */; };
 		0A217BCA2057B000006D3044 /* VerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A217BC92057B000006D3044 /* VerificationViewController.swift */; };
 		0A217BCE2058EC11006D3044 /* ContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A217BCC2058EC11006D3044 /* ContactsTableViewCell.swift */; };
 		0A217BCF2058EC11006D3044 /* ContactsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A217BCD2058EC11006D3044 /* ContactsTableViewCell.xib */; };
@@ -33,6 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A13F29520B22D0900DFEFAA /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0A217BC92057B000006D3044 /* VerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationViewController.swift; sourceTree = "<group>"; };
 		0A217BCC2058EC11006D3044 /* ContactsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsTableViewCell.swift; sourceTree = "<group>"; };
 		0A217BCD2058EC11006D3044 /* ContactsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactsTableViewCell.xib; sourceTree = "<group>"; };
@@ -75,6 +77,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A13F29720B22D1200DFEFAA /* Data Model */ = {
+			isa = PBXGroup;
+			children = (
+				0A13F29520B22D0900DFEFAA /* User.swift */,
+			);
+			path = "Data Model";
+			sourceTree = "<group>";
+		};
 		0A217BC62057730B006D3044 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -144,6 +154,7 @@
 				0A217BC62057730B006D3044 /* View */,
 				0A217BC720577314006D3044 /* Controller */,
 				0A217BCB2058EBC4006D3044 /* Custom Cells */,
+				0A13F29720B22D1200DFEFAA /* Data Model */,
 				0A217BC820577323006D3044 /* Model */,
 				0A471FD62057418F008C964D /* Assets.xcassets */,
 				0A471FDB2057418F008C964D /* Info.plist */,
@@ -332,6 +343,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A13F29620B22D0900DFEFAA /* User.swift in Sources */,
 				0A52D207205F8F2400AE17C8 /* ConversationsTableViewCell.swift in Sources */,
 				0A217BCE2058EC11006D3044 /* ContactsTableViewCell.swift in Sources */,
 				0A991269205B9273006A8053 /* AddNameViewController.swift in Sources */,
