@@ -11,4 +11,6 @@ import RealmSwift
 
 class All: Object {
     @objc dynamic var phoneNumber : String = ""
+    var parentCategory = LinkingObjects(fromType: User.self, property: "all")
+    let allMessages = List<AllMessages>()
 }

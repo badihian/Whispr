@@ -11,4 +11,6 @@ import RealmSwift
 
 class Contacts: Object {
     @objc dynamic var phoneNumber : String = ""
+    var parentCategory = LinkingObjects(fromType: User.self, property: "contacts")
+    let contactsMessages = List<ContactsMessages>()
 }

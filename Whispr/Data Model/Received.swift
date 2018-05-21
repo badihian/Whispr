@@ -11,5 +11,7 @@ import RealmSwift
 
 class Received: Object {
     @objc dynamic var phoneNumber : String = ""
+    var parentCategory = LinkingObjects(fromType: User.self, property: "received")
+    let receivedMessages = List<ReceivedMessages>()
 }
 

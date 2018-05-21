@@ -16,5 +16,6 @@ class AllMessages: Object {
     @objc dynamic var senderNumber : String = ""
     @objc dynamic var timeStamp : String = ""
     @objc dynamic var messageID : String = ""
+    var parentCategory = LinkingObjects(fromType: All.self, property: "allMessages")
 }
 

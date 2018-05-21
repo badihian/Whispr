@@ -12,7 +12,6 @@
 		0A13F29D20B2308800DFEFAA /* Contacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A13F29C20B2308800DFEFAA /* Contacts.swift */; };
 		0A13F29F20B2309100DFEFAA /* Sent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A13F29E20B2309100DFEFAA /* Sent.swift */; };
 		0A13F2A120B2309F00DFEFAA /* Received.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A13F2A020B2309F00DFEFAA /* Received.swift */; };
-		0A13F2A320B23A7E00DFEFAA /* ContactsNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A13F2A220B23A7E00DFEFAA /* ContactsNames.swift */; };
 		0A13F2A520B23A9600DFEFAA /* ContactsMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A13F2A420B23A9600DFEFAA /* ContactsMessages.swift */; };
 		0A13F2A720B23B5900DFEFAA /* SentMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A13F2A620B23B5900DFEFAA /* SentMessages.swift */; };
 		0A13F2AB20B2402800DFEFAA /* ReceivedMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A13F2AA20B2402800DFEFAA /* ReceivedMessages.swift */; };
@@ -48,7 +47,6 @@
 		0A13F29C20B2308800DFEFAA /* Contacts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contacts.swift; sourceTree = "<group>"; };
 		0A13F29E20B2309100DFEFAA /* Sent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sent.swift; sourceTree = "<group>"; };
 		0A13F2A020B2309F00DFEFAA /* Received.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Received.swift; sourceTree = "<group>"; };
-		0A13F2A220B23A7E00DFEFAA /* ContactsNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsNames.swift; sourceTree = "<group>"; };
 		0A13F2A420B23A9600DFEFAA /* ContactsMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsMessages.swift; sourceTree = "<group>"; };
 		0A13F2A620B23B5900DFEFAA /* SentMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentMessages.swift; sourceTree = "<group>"; };
 		0A13F2AA20B2402800DFEFAA /* ReceivedMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedMessages.swift; sourceTree = "<group>"; };
@@ -101,7 +99,6 @@
 				0A13F29520B22D0900DFEFAA /* User.swift */,
 				0A13F29C20B2308800DFEFAA /* Contacts.swift */,
 				0A13F2A420B23A9600DFEFAA /* ContactsMessages.swift */,
-				0A13F2A220B23A7E00DFEFAA /* ContactsNames.swift */,
 				0A13F29E20B2309100DFEFAA /* Sent.swift */,
 				0A13F2A620B23B5900DFEFAA /* SentMessages.swift */,
 				0A13F2A020B2309F00DFEFAA /* Received.swift */,
@@ -372,7 +369,6 @@
 			files = (
 				0A13F2AB20B2402800DFEFAA /* ReceivedMessages.swift in Sources */,
 				0A13F2A120B2309F00DFEFAA /* Received.swift in Sources */,
-				0A13F2A320B23A7E00DFEFAA /* ContactsNames.swift in Sources */,
 				0A13F29620B22D0900DFEFAA /* User.swift in Sources */,
 				0A52D207205F8F2400AE17C8 /* ConversationsTableViewCell.swift in Sources */,
 				0A217BCE2058EC11006D3044 /* ContactsTableViewCell.swift in Sources */,
