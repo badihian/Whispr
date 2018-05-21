@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         do {
-            let realm = try Realm()
+            _ = try Realm()
         } catch {
             print("Error initializing new Realm database \(error)")
         }

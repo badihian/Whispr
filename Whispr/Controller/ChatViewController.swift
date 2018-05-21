@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import RealmSwift
 import Contacts
 import ContactsUI
 import ChameleonFramework
@@ -68,12 +69,16 @@ class ChatViewController: UIViewController, CNContactPickerDelegate, UISearchBar
     
     var contactInfo = [contactsUsed]()
     var isComposePressed = Bool()
+    
     let contactStore = CNContactStore()
     var contacts = [CNContact]()
     let keys = [CNContactFormatter.descriptorForRequiredKeys(for: .fullName), CNContactPhoneNumbersKey] as [Any]
+    
     var messageArray : [ChatMessages] = [ChatMessages]()
     var receivingArray : [ReceivingContact] = [ReceivingContact]()
+    
     let user = Auth.auth().currentUser
+    
     var cellContactName = String()
     var cellContactNumber = String()
     var recipientNumber = String()
@@ -81,6 +86,8 @@ class ChatViewController: UIViewController, CNContactPickerDelegate, UISearchBar
     var dataArray = String()
     var multipleSelection = false
     var oldNumLines = CGFloat()
+    
+    let realm = try! Realm()
     
     func scrollToBottom() {
         
@@ -104,6 +111,9 @@ class ChatViewController: UIViewController, CNContactPickerDelegate, UISearchBar
     override func viewDidLoad() {
         super.viewDidLoad()
         sendButton.isEnabled = false
+        
+        
+        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
         
@@ -360,6 +370,7 @@ class ChatViewController: UIViewController, CNContactPickerDelegate, UISearchBar
         contactNameView.isHidden = true
         sendButton.isEnabled = false
         
+        
         let messagesDB = Database.database().reference().child("Conversations").child("ChatMessages")
         if let user = user {
             var userNumber = user.phoneNumber!
@@ -410,6 +421,55 @@ class ChatViewController: UIViewController, CNContactPickerDelegate, UISearchBar
             ref.child("Conversations").updateChildValues(childUpdatesSent)
             ref.child("Conversations").updateChildValues(childUpdatesReceived)
             
+            do{
+                try self.realm.write {
+                    
+                    let realmUser = User()
+                    let realmContacts = Contacts()
+                    let realmContactsMessages = ContactsMessages()
+                    let realmSent = Sent()
+                    let realmSentMessages = SentMessages()
+                    let realmAll = All()
+                    let realmAllMessages = AllMessages()
+                    
+                    if realmUser.phoneNumber.isEmpty{
+                        realmUser.phoneNumber = userNumber
+                        realm.add(realmUser)
+                    }
+                    
+                    realmContacts.phoneNumber = self.recipientNumber
+                    realmContactsMessages.contactName = self.contactName
+                    realmContactsMessages.messageID = key
+                    realmSent.phoneNumber = self.recipientNumber
+                    realmSentMessages.messageBody = composeTextView.text!
+                    realmSentMessages.recipientName = self.contactName
+                    realmSentMessages.recipientNumber = self.recipientNumber
+                    realmSentMessages.senderNumber = userNumber
+                    realmSentMessages.timeStamp = timeStamp
+                    realmSentMessages.messageID = key
+                    realmAll.phoneNumber = self.recipientNumber
+                    realmAllMessages.messageBody = composeTextView.text!
+                    realmAllMessages.recipientName = self.contactName
+                    realmAllMessages.recipientNumber = self.recipientNumber
+                    realmAllMessages.senderNumber = userNumber
+                    realmAllMessages.timeStamp = timeStamp
+                    realmAllMessages.messageID = key
+                    
+                    realmUser.contacts.append(realmContacts)
+                    realmContacts.contactsMessages.append(realmContactsMessages)
+                    realmUser.sent.append(realmSent)
+                    realmSent.sentMessages.append(realmSentMessages)
+                    realmUser.all.append(realmAll)
+                    realmAll.allMessages.append(realmAllMessages)
+                }
+            } catch {
+                print("Error saving data to Realm database \(error)")
+            }
+//            saveRealmData(realmData: realmContacts)
+//            saveRealmData(realmData: realmContactsMessages)
+//            saveRealmData(realmData: realmSent)
+//            saveRealmData(realmData: realmSentMessages)
+            
             
             messagesDB.childByAutoId().setValue(messageDictionary) {
                 
@@ -427,6 +487,16 @@ class ChatViewController: UIViewController, CNContactPickerDelegate, UISearchBar
             }
         }
     }
+    
+//    func saveRealmData(realmData: Any) {
+//        do {
+//            try realm.write {
+//                realm.add(realmData as! Object)
+//            }
+//        } catch {
+//            print("Error saving data to Realm \(error)")
+//        }
+//    }
     
     func retrieveMessages() {
         
