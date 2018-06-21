@@ -31,7 +31,6 @@ struct contactsUsed {
             }
         }
     }
-    
 }
 
 extension UIColor {
@@ -98,20 +97,17 @@ class ChatViewController: UIViewController, CNContactPickerDelegate, UISearchBar
             
             self.chatTableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: false)
         }
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         print("Test viewDidAppear")
-        
         scrollToBottom()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         sendButton.isEnabled = false
-        
         
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         
@@ -179,7 +175,6 @@ class ChatViewController: UIViewController, CNContactPickerDelegate, UISearchBar
         
         if composeTextView.frame.size.height > 33 {
             if diffNumLines < -0.75 {
-                
                 if newNumLines > 1.97521627308861 && composeTextView.frame.size.height < (5 * (composeTextView.font?.lineHeight)!) {
                     composeTextView.frame.size.height += heightChange
                     composeViewHeightConstraint.constant += heightChange
@@ -187,12 +182,10 @@ class ChatViewController: UIViewController, CNContactPickerDelegate, UISearchBar
             }
             
             if composeTextView.frame.size.height >= (5 * (composeTextView.font?.lineHeight)!) && composeTextView.frame.size.height < (6 * (composeTextView.font?.lineHeight)!) && diffNumLines < -0.75 {
-                
                 composeTextView.frame.size.height += heightChange
                 composeViewHeightConstraint.constant += heightChange
             }
         }
-        
         self.oldNumLines = newNumLines
     }
     
@@ -200,7 +193,6 @@ class ChatViewController: UIViewController, CNContactPickerDelegate, UISearchBar
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
     
     // MARK: - TableView
     
@@ -255,20 +247,16 @@ class ChatViewController: UIViewController, CNContactPickerDelegate, UISearchBar
         return cell
     }
     
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         let selectedCellCount = updateCellCount()
         if selectedCellCount > 0 {
             self.deleteButton.isEnabled = true
         } else if selectedCellCount == 0{
             self.deleteButton.isEnabled = false
         }
-        
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        
         let selectedCellCount = updateCellCount()
         if selectedCellCount > 0 {
             self.deleteButton.isEnabled = true
@@ -282,36 +270,28 @@ class ChatViewController: UIViewController, CNContactPickerDelegate, UISearchBar
     }
     
     @objc func tableViewTapped() {
-        
         self.contactTextField.endEditing(true)
         self.composeTextView.endEditing(true)
         self.chatSearchBar.endEditing(true)
+        
         UIView.animate(withDuration: 0.2){
-            
             self.composeViewBottomConstraint.constant = self.view.safeAreaInsets.bottom - 34
             self.view.layoutIfNeeded()
         }
-        
     }
     
     func configureTableView() {
         self.chatTableView.rowHeight = UITableViewAutomaticDimension
         self.chatTableView.estimatedRowHeight = 20.0
-        
     }
     
     func updateCellCount() -> Int{
-        
         var listCount = 0
-        
         if let list = chatTableView.indexPathsForSelectedRows as [NSIndexPath]? {
-            
             if list.count > 0 {
-                
                 listCount = list.count
             }
         }
-        
         return listCount
     }
     
@@ -320,28 +300,19 @@ class ChatViewController: UIViewController, CNContactPickerDelegate, UISearchBar
     
     @objc func keyboardWillShow(notification: Notification) {
         let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
-        
         let keyboardHeight = keyboardSize?.height
-        
         print("In keyboardWillShow composeViewBottomConstraint.constant = \(composeViewBottomConstraint.constant)")
         
         if #available(iOS 11.0, *){
-            
             self.composeViewBottomConstraint.constant = keyboardHeight! - view.safeAreaInsets.bottom
         }
         else {
             self.composeViewBottomConstraint.constant = view.safeAreaInsets.bottom
         }
-        
         self.view.layoutIfNeeded()
-        
     }
     
-    
-    
     func textViewDidChange(_ textView: UITextView) {
-        
-        
         if self.composeTextView.text == "" {
             self.sendButton.isEnabled = false
         }
@@ -360,23 +331,16 @@ class ChatViewController: UIViewController, CNContactPickerDelegate, UISearchBar
     // MARK: - Send Messages
     
     @IBAction func sendPressed(_ sender: Any) {
-        
         var ref: DatabaseReference!
-        
         ref = Database.database().reference()
-        
         self.contactTextField.endEditing(true)
-        
         contactNameView.isHidden = true
         sendButton.isEnabled = false
-        
         
         let messagesDB = Database.database().reference().child("Conversations").child("ChatMessages")
         if let user = user {
             var userNumber = user.phoneNumber!
-            
             userNumber = String(describing: userNumber)
-            
             
             if !self.contactInfo.isEmpty{
                 self.recipientNumber = self.contactInfo[0].phoneNumber
@@ -391,16 +355,12 @@ class ChatViewController: UIViewController, CNContactPickerDelegate, UISearchBar
             
             if self.contactInfo.count > 1{
                 for contact in 1...self.contactInfo.count - 1{
-                    
                     self.recipientNumber += ", \(self.contactInfo[contact].phoneNumber)"
                     self.contactName += ", \(self.contactInfo[contact].firstName)"
-                    
                 }
             }
             
-            
             let timeStamp = String(describing: Date())
-            
             
             let contactDictionary = ["Name" : self.contactName]
             
@@ -474,7 +434,6 @@ class ChatViewController: UIViewController, CNContactPickerDelegate, UISearchBar
 //            saveRealmData(realmData: realmSent)
 //            saveRealmData(realmData: realmSentMessages)
             
-            
             messagesDB.childByAutoId().setValue(messageDictionary) {
                 
                 (error, reference) in
@@ -503,7 +462,6 @@ class ChatViewController: UIViewController, CNContactPickerDelegate, UISearchBar
 //    }
     
     func retrieveMessages() {
-        
         if let user = user {
             var userNumber = user.phoneNumber!
             userNumber = String(describing: userNumber)
@@ -517,9 +475,7 @@ class ChatViewController: UIViewController, CNContactPickerDelegate, UISearchBar
                 
                 recipient = self.cellContactNumber
             }
-            
             if !recipient.isEmpty{
-                
                 let messagesDB = Database.database().reference().child("Conversations").child("user").child(userNumber).child("all").child(recipient)
                 
                 messagesDB.observe(.childAdded) { (snapshot) in
@@ -551,9 +507,7 @@ class ChatViewController: UIViewController, CNContactPickerDelegate, UISearchBar
                     self.scrollToBottom()
                 }
                 messagesDB.observe(.childRemoved) { (snapshot) in
-                    
                     let uid = snapshot.key
-                    
                     
                     let arrayCount = (self.messageArray.count - 1)
                     for index in 0...arrayCount {
@@ -589,7 +543,6 @@ class ChatViewController: UIViewController, CNContactPickerDelegate, UISearchBar
             self.multipleSelection = true
         }
         else if self.multipleSelection == true {
-            
             deleteButton.tintColor = UIColor.black
             
             self.chatTableView.visibleCells.forEach { cell in
@@ -633,7 +586,6 @@ class ChatViewController: UIViewController, CNContactPickerDelegate, UISearchBar
                 for path in paths {
                     print("path: \(path)")
                     
-                    
                     let deleteObserver = messagesDB.observe(.childAdded) { (snapshot) in
                         
                         print("snapshot.key: \(snapshot.key)")
@@ -658,10 +610,7 @@ class ChatViewController: UIViewController, CNContactPickerDelegate, UISearchBar
         }
         self.chatTableView.setEditing(false, animated: true)
         self.multipleSelection = false
-        
-        
     }
-    
     
     @IBAction func searchButton(_ sender: Any) {
         if chatSearchBar.isHidden == true {
@@ -719,8 +668,6 @@ class ChatViewController: UIViewController, CNContactPickerDelegate, UISearchBar
         contactPicker.delegate = self
         self.present(contactPicker, animated: true, completion: nil)
         
-        
-        
     }
     
     func contactPickerDidCancel(_ picker: CNContactPickerViewController) {
@@ -728,7 +675,6 @@ class ChatViewController: UIViewController, CNContactPickerDelegate, UISearchBar
         picker.dismiss(animated: true) {
             
         }
-        
         
     }
     
