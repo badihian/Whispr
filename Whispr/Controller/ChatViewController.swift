@@ -407,6 +407,8 @@ class ChatViewController: UIViewController, CNContactPickerDelegate, UISearchBar
             let key = ref.child("Conversations").childByAutoId().key
             print("sendKey: \(key)")
             
+            //MARK: Send data to Firebase
+            
             let recipientDictionary = ["Recipient" : self.recipientNumber]
             let messageDictionary = ["Sender" : String(describing: userNumber), "MessageBody" : composeTextView.text!, "Recipient" : self.recipientNumber, "Name" : self.contactName, "Timestamp" : timeStamp, "UID" : key]
             
@@ -420,6 +422,8 @@ class ChatViewController: UIViewController, CNContactPickerDelegate, UISearchBar
             ref.child("Conversations").updateChildValues(childUpdatesRecipientAll)
             ref.child("Conversations").updateChildValues(childUpdatesSent)
             ref.child("Conversations").updateChildValues(childUpdatesReceived)
+            
+            //MARK: Send data to Realm
             
             do{
                 try self.realm.write {
